@@ -20,6 +20,7 @@ timezone: Europe/Madrid
 # ↓ --------------------------
 
 title: L4nder                          # the main title
+favicon: /assets/img/favicons/favicon.ico
 
 tagline: Cybersecurity Enthusiast / Future OSCP-OSWE-OSEP   # it will display as the sub-title
 
