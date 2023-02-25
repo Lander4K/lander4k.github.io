@@ -2,7 +2,7 @@
 title: Awkward WriteUp
 categories: [HackTheBox, Writeup]
 tags: [HackTheBox, LFI, Script Hijacking]
-img_path: /assets/img/commons/hackthebox/awkward/
+img_path: /assets/HTB/Awkward
 ---
 
 <img src="awkward.png">
