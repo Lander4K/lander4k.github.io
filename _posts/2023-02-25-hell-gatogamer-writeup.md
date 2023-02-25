@@ -147,8 +147,6 @@ The password is: webserver2023!
 
 Podemos probar la contraseña con usuarios comunes tales como `admin, administrator, root, guest, user` pero ninguno de estos usuarios son válidos
 
-<img src="nouser.png">
-
 Podemos crear un script en python para hacer un ataque de fuerza bruta en el campo del usuario.
 
 ```python
