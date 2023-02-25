@@ -189,6 +189,7 @@ exclude:
   - gulpfile.js
   - node_modules
   - package*.json
+  - Writeups
 
 jekyll-archives:
   enabled: [categories, tags]
