@@ -5,7 +5,7 @@ categories: [HackTheBox, Writeup]
 tags: [HackTheBox, RCE, Path Hijacking]
 ---
 
-<img src="machine.png">
+![Photobomb]({{ 'assets/HTB/Photobomb/machine.png' | relative_url }}){: .center-image }
 
 Hoy tocará explotar la máquina **Photobomb** de [HackTheBox](https://app.hackthebox.com/machines/photobomb), es de dificultad fácil. Haremos un `command injection` y para la escalada haremos un `Path Hijacking`
 
