@@ -1119,7 +1119,7 @@ eddie@hell:/var/mail$
 
 Podemos ver si el usuario `ghost` reutiliza la contraseña, nos convertimos en `ghost`
 
-```ghost
+```shell
 eddie@hell:/var/mail$ su ghost
 Password: MySuperSecurePassword123!
 ghost@hell:/var/mail$ id
