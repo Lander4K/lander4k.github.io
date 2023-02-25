@@ -640,9 +640,9 @@ Al ejecutar el script nos dumpea 3 usuarios y contraseñas
 
 El contenedor corría SSH, y lo tenemos en nuestro localhost, podemos ver que las credenciales de Txhaka son válidas
 
-```plaintext
+```shell
 ❯ ssh txhaka@localhost
-txhaka@localhost's password: iamoswe2023!
+txhaka@localhost password: iamoswe2023!
 txhaka@6daad149d190:~$ id
 uid=1000(txhaka) gid=1000(txhaka) groups=1000(txhaka)
 txhaka@6daad149d190:~$ hostname -I
@@ -926,7 +926,7 @@ El mensaje contiene credenciales SSH, nos coenctamos por SSH como `pascual`, fin
 
 ```shell
 ❯ ssh pascual@192.168.1.58
-pascual@192.168.1.58's password: vulnwhatsapp123!
+pascual@192.168.1.58 password: vulnwhatsapp123!
 pascual@hell:~$ id
 uid=1004(pascual) gid=1004(pascual) groups=1004(pascual)
 pascual@hell:~$ hostname -I
