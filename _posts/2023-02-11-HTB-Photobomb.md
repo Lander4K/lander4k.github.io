@@ -1,14 +1,12 @@
 ---
 title: Photobomb WriteUp
-author:  
-date: 2023-02-11
+published: true
+img_path: /assets/img/commons/hackthebox/photobomb
 categories: [HackTheBox, Writeup]
 tags: [HackTheBox, RCE, Path Hijacking]
-pin: 
-image:
-  path: /assets/img/commons/hackthebox/photobomb/Photobomb.png 
-  alt: Photobomb WriteUp
 ---
+
+<img src="photobomb.png">
 
 Hoy tocará explotar la máquina **Photobomb** de [HackTheBox](https://app.hackthebox.com/machines/photobomb), es de dificultad fácil. Haremos un `command injection` y para la escalada haremos un `Path Hijacking`
 

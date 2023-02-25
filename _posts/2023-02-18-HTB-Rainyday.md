@@ -1,15 +1,11 @@
 ---
 title: Rainyday WriteUp
-author:  
-date: 2023-02-11
 categories: [HackTheBox, Writeup]
 img_path: /assets/img/commons/hackthebox/rainyday
 tags: [HackTheBox, Hard, Docker]
-pin: 
-image:
-  path: rainyday.png 
-  alt: Rainyday WriteUp
 ---
+
+<img src="rainyday.png">
 
 Buenas! El día de hoy completaremos la máquina [RainyDay](https://app.hackthebox.com/machines/RainyDay) de [HackTheBox](https://app.hackthebox.com), donde tocaremos los siguientes puntos:
 

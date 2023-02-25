@@ -1,15 +1,11 @@
 ---
 title: Awkward WriteUp
-author:  
-date: 2023-02-18
 categories: [HackTheBox, Writeup]
 tags: [HackTheBox, LFI, Script Hijacking]
 img_path: /assets/img/commons/hackthebox/awkward/
-pin: 
-image:
-  path: awkward.png
-  alt: Awkward WriteUp
 ---
+
+<img src="awkward.png">
 
 Buenas! El día de hoy completaremos la máquina [Awkward](https://app.hackthebox.com/machines/Awkward) de [HackTheBox](https://app.hackthebox.com), donde tocaremos los siguientes puntos: 
 
