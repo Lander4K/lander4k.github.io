@@ -640,7 +640,7 @@ Al ejecutar el script nos dumpea 3 usuarios y contraseñas
 
 El contenedor corría SSH, y lo tenemos en nuestro localhost, podemos ver que las credenciales de Txhaka son válidas
 
-```shell
+```plaintext
 ❯ ssh txhaka@localhost
 txhaka@localhost's password: iamoswe2023!
 txhaka@6daad149d190:~$ id
