@@ -1,5 +1,5 @@
 ---
-title: Rainyday WriteUp
+title: HTB - Rainyday
 categories: [HackTheBox, Writeup]
 img_path: /assets/HTB/Rainyday
 tags: [HackTheBox, Hard, Docker]

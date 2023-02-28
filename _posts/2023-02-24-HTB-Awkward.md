@@ -1,5 +1,5 @@
 ---
-title: Awkward WriteUp
+title: HTB - Awkward 
 categories: [HackTheBox, Writeup]
 tags: [HackTheBox, LFI, Script Hijacking]
 img_path: /assets/HTB/Awkward

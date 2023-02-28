@@ -1,5 +1,5 @@
 ---
-title: Photobomb WriteUp
+title: HTB - Photobombs
 published: true
 categories: [HackTheBox, Writeup]
 tags: [HackTheBox, RCE, Path Hijacking]
