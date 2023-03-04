@@ -13,7 +13,9 @@ Buenas!! Hoy completaremos la máquina `Matrix Breakout` de la plataforma de [Vu
 - **Arbitrary File Writing**
 - **Exploiting CVE-2022-0847 Dirty Pipe**
 
-# Enumeración
+## Enumeración
+
+* * * 
 
 Para comenzar con la máquina, deberemos de saber su IP, así que comenzaremos con la herramienta `arp-scan` para escanear toda nuestra red local
 
@@ -138,7 +140,9 @@ En este punto lo que haremos será fuzzear por directorios en el puerto 80, en m
 ===============================================================
 ```
 
-# Explotación
+## Explotación
+
+* * *
 
 Si accedemos al recurso `graffiti.php`, el cual nos pide un mensaje, vamos a interceptar la petición con burpsuite
 
@@ -213,7 +217,9 @@ Also, pull this image from the webserver on port 80 to get a flag.
 www-data@morpheus:/$ 
 ```
 
-# Escalada de Privilegios
+## Escalada de Privilegios
+
+* * * 
 
 Si bien recordamos, en el puerto 81 estaba corriendo el servicio `nginx`, así que nos dirigiremos al directorio `/var/nginx/html/`, para encontrar la contraseña hasheada del usuario `cypher` en la web
 
