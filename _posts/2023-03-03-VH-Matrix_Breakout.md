@@ -239,7 +239,7 @@ www-data@morpheus:/var/nginx/html$
 
 Si intentamos crackear el hash, este no nos dejará entrar a la web, así que no le veo el sentido a crackearlo ahora mismo
 
-Inspeccionando el sistema con linpeas, nos arroja que el sistema es vulnerable a (CVE-2022-0847)[https://gitcode.net/mirrors/r1is/CVE-2022-0847], el cúal es un Dirty Pipe, descargaremos el archivo, le daremos permisos de ejecución y conseguiremos la shell como el usuario `root`!
+Inspeccionando el sistema con linpeas, nos arroja que el sistema es vulnerable a [CVE-2022-0847](https://gitcode.net/mirrors/r1is/CVE-2022-0847), el cúal es un Dirty Pipe, descargaremos el archivo, le daremos permisos de ejecución y conseguiremos la shell como el usuario `root`!
 
 ```shell
 www-data@morpheus:/tmp$ chmod +x Dirty-Pipe.sh 
