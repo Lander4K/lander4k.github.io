@@ -1,12 +1,11 @@
 ---
-title: VH - Matrix-Breakout
-published: true
-img_path: /assets/VH/Matrix-Breakout
-categories: [Vulnhub, Writeup]
-tags: [Vulnhub]
+layout      : post
+title       : "Matrix Breakout - Vulnhub"
+author      : l4nder
+image       : assets/images/VH/Matrix-Breakout/matrix.jpg
+category    : [ Vulnhub ]
+tags        : [ Linux ]
 ---
-
-<img src="vulnhub.png">
 
 Buenas!! Hoy completaremos la máquina `Matrix Breakout` de la plataforma de [Vulnhub](https://vulnhub.com/entry/matrix-breakout-2-morpheus,757/), donde tocaremos los siguientes puntos:
 
@@ -108,11 +107,11 @@ Nmap done: 1 IP address (1 host up) scanned in 7.01 seconds
 
 Si nos metemos a la página web, podemos ver lo siguiente
 
-<img src="web1.png">
+![](/assets/images/VH/Matrix-Breakout/web1.png)
 
 No encontramos nada interesante, si nos conectamos al servicio HTTP corriendo en el puerto 81, nos pide unas credenciales (las cuales actualmente no poseemos)
 
-<img src="login.png">
+![](/assets/images/VH/Matrix-Breakout/login.png)
 
 En este punto lo que haremos será fuzzear por directorios en el puerto 80, en mi caso voy a usar la herramienta `gobuster`, aunque podéis usar otras como `wfuzz`, `ffuf` o `dirbuster`, encontramos el archivo `graffiti.php`
 
@@ -146,19 +145,19 @@ En este punto lo que haremos será fuzzear por directorios en el puerto 80, en m
 
 Si accedemos al recurso `graffiti.php`, el cual nos pide un mensaje, vamos a interceptar la petición con burpsuite
 
-<img src="graffiti.png">
+![](/assets/images/VH/Matrix-Breakout/graffiti.png)
 
-<img src="burp.png">
+![](/assets/images/VH/Matrix-Breakout/burp.png)
 
 Si nos fijamos bien en la petición, vemos que nos da la opción de un mensaje y un archivo, vamos a intentar colar una webshell en php...
 
-<img src="burp1.png">
+![](/assets/images/VH/Matrix-Breakout/burp1.png)
 
 Ahora si accedemos al recurso en PHP, y le concatenanos `?cmd=(comando)` a la URL, nos damos cuenta que estamos ejecutando comandos, así que nos entablaremos una reverse shell
 
-<img src="web2.png">
+![](/assets/images/VH/Matrix-Breakout/web2.png)
 
-<img src="web3.png">
+![](/assets/images/VH/Matrix-Breakout/web3.png)
 
 ```shell
 ❯ nc -nvlp 443

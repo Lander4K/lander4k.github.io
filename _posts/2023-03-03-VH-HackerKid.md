@@ -1,12 +1,11 @@
 ---
-title: VH - Hacker Kid
-published: true
-img_path: /assets/VH/HackerKid
-categories: [Vulnhub, Writeup]
-tags: [Vulnhub]
+layout      : post
+title       : "Hacker Kid - Vulnhub"
+author      : L4nder
+image       : assets/images/VH/HackerKid/hacker.jpg
+category    : [ Vulnhub ]
+tags        : [ Linux ]
 ---
-
-<img src="vulnhub.png">
 
 Buenas! Hoy completaremos la máquina `Hacker Kid: 1.0.1` de la plataforma [Vulnhub](https://www.vulnhub.com/entry/hacker-kid-101,719/)!, donde tocaremos los siguientes puntos
 
@@ -116,7 +115,7 @@ http://192.168.1.148:9999/login?next=%2F [200 OK] Cookies[_xsrf], Country[RESERV
 
 Accederemos al servicio HTTP corriendo en el puerto 80, nos encontramos con esto
 
-<img src="web.png">
+![](/assets/images/VH/HackerKid/web.png)
 
 Checkeando el código fuente de la página web, encontramos un comentario interesante
 
@@ -132,7 +131,7 @@ Checkeando el código fuente de la página web, encontramos un comentario intere
 
 Teniendo esto en cuenta, podemos concatenarle `/?page_no={}` a la URL, si ponemos cualquier número, nos aparece lo siguiente
 
-<img src="web1.png">
+![](/assets/images/VH/HackerKid/web1.png)
 
 Podemos fuzzear con la herramienta `wfuzz` por números en la url, eso mismo haremos
 
@@ -154,7 +153,7 @@ ID           Response   Lines    Word       Chars       Payload
 
 Ahora si ponemos el número en el parámetro, nos aparece lo siguiente
 
-<img src="web2.png">
+![](/assets/images/VH/HackerKid/web2.png)
 
 El mensaje nos da el subdominio `hackers.blackhat.local`, lo agregaremos al archivo `/etc/hosts`
 
@@ -165,7 +164,7 @@ El mensaje nos da el subdominio `hackers.blackhat.local`, lo agregaremos al arch
 
 Sí accedemos a la página `blackhat.local`, nos devuelve un código de estado 403 forbidden
 
-<img src="forbidden.png">
+![](/assets/images/VH/HackerKid/forbidden.png)
 
 Ahora que no podemos proceder a nada, intentaremos buscar subdominios con la herramienta `dig`
 
@@ -197,7 +196,7 @@ blackhat.local.		3600	IN	SOA	blackhat.local. hackerkid.blackhat.local. 1 10800 3
 
 Encontramos el subdominio `hackerkid.blackhat.local`, el cúal lo añadiremos al `/etc/hosts`
 
-<img src="hackerkid.png">
+![](/assets/images/VH/HackerKid/hackerkid.png)
 
 ## Explotación
 
@@ -207,15 +206,15 @@ Encontramos el subdominio `hackerkid.blackhat.local`, el cúal lo añadiremos al
 
 Interceptaremos la petición con `BurpSuite`, nos encontramos lo siguiente
 
-<img src="xxe.png">
+![](/assets/images/VH/HackerKid/xxe.png)
 
 Sabiendo que el campo `EMAIL` queda reflejado en la página, podemos intentar inyectar código XML, intentando un ataque XXE (Xml External Entity Injection)
 
-<img src="xxe1.png">
+![](/assets/images/VH/HackerKid/xxe1.png)
 
 Previamente, nos habían hablado de un directorio home, así que intentaremos leer el archivo `.bashrc` del usuario `saket`
 
-<img src="xxe2.png">
+![](/assets/images/VH/HackerKid/xxe2.png)
 
 Ahora, decodearemos el contenido, y nos encontramos lo siguiente...
 
@@ -229,7 +228,7 @@ password="Saket!#$%@!!"
 
 Tenemos credenciales válidas para la aplicación de python web, así que accederemos con las credenciales
 
-<img src="creds.png">
+![](/assets/images/VH/HackerKid/creds.png)
 
 ### SSTI (Server Side Template Injection)
 
@@ -237,15 +236,15 @@ Tenemos credenciales válidas para la aplicación de python web, así que accede
 
 Nos encontramos con lo siguiente
 
-<img src="web3.png">
+![](/assets/images/VH/HackerKid/web3.png)
 
 Con el parámetro `?name` le podemos proporcionar un nombre el cúal queda reflejado en la web
 
-<img src="ssti.png">
+![](/assets/images/VH/HackerKid/ssti.png)
 
 Intentaremos la típica inyección, lo cual nos confirma que estamos delante de un `SSTI`
 
-<img src="ssti1.png">
+![](/assets/images/VH/HackerKid/ssti1.png)
 
 Podemos inyectar este [payload](https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/Server%20Side%20Template%20Injection) para ejecutar comandos en la máquina víctima, así que nos pondremos en escucha en el puerto 443 con la herramienta `netcat`, el payload lo deberemos de URL-Encodear, obtenemos la reverse shell
 

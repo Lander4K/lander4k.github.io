@@ -1,11 +1,12 @@
 ---
-title: HTB - Awkward 
-categories: [HackTheBox, Writeup]
-tags: [HackTheBox, LFI, Script Hijacking]
-img_path: /assets/HTB/Awkward
+layout      : post
+title       : "Rainyday - HackTheBox"
+author      : L4nder
+img_path    : assets/images/HTB/Awkward
+image       : assets/images/HTB/Awkward/Awkward.jpg
+category    : [ HackTheBox ]
+tags        : [ Linux ]
 ---
-
-<img src="awkward.png">
 
 Buenas! El día de hoy completaremos la máquina [Awkward](https://app.hackthebox.com/machines/Awkward) de [HackTheBox](https://app.hackthebox.com), donde tocaremos los siguientes puntos: 
 
@@ -48,7 +49,7 @@ echo "10.10.11.185 hat-valley.htb" | sudo tee -a /etc/hosts
 
 Fijandonos en el código fuente nos damos cuenta de un app.js
 
-<img src="app.js.png">
+![](/assets/images/HTB/Awkward/app.js.png)
 
 Desde curl, y aplicando unas expresiones regulares, podemos encontrar rutas de la web
 
@@ -62,7 +63,7 @@ Desde curl, y aplicando unas expresiones regulares, podemos encontrar rutas de l
 
 Podemos ver /hr, donde hay una página de login
 
-<img src="hr.png">
+![](/assets/images/HTB/Awkward/hr.png)
 
 Siguiendo aplicando expresiones regulares en el archivo .js, encontramos más rutas para la api
 
@@ -136,15 +137,15 @@ Session completed.
 
 Ahora usando las credenciales nos podemos loguear a /hr
 
-<img src="dashboard.png">
+![](/assets/images/HTB/Awkward/dashboard.png)
 
 En la página hay un botón `refresh`, pero al darle no hace nada
 
-<img src="refresh.png">
+![](/assets/images/HTB/Awkward/refresh.png)
 
 Si interceptamos la petición con BurpSuite podemos ver que apunta a un recurso web con el parámetro `url`
 
-<img src="burp.png">
+![](/assets/images/HTB/Awkward/burp.png)
 
 Ahora nos podemos aprovechar de un SSRF para apuntar a puertos locales de la propia máquina y fuzzearlos
 
@@ -168,11 +169,11 @@ ID           Response   Lines    Word       Chars       Payload
 
 Vemos el puerto 3002, al visitarlo (por el SSRF), podemos ver la documentación de la API
 
-<img src="api.png">
+![](/assets/images/HTB/Awkward/api.png)
 
 Podemos ver que hace una petición a /all-leave ejecuta el comando `awk` con parámetros
 
-<img src="badinuser.png">
+![](/assets/images/HTB/Awkward/badinuser.png)
 
 Nos podemos aprovechar de la variable user, para incluir archivos locales de la siguiente manera
 
@@ -200,7 +201,7 @@ Session completed.
 
 En [jwt.io](https://jwt.io) podemos modificar la cookie cambiando el username por `/etc/passwd`
 
-<img src="cookie.png">
+![](/assets/images/HTB/Awkward/cookie.png)
 
 Nos genera la siguiente cookie, que tenemos que cambiar para hacer una petición contra /api/all-leave
 
@@ -208,7 +209,7 @@ Nos genera la siguiente cookie, que tenemos que cambiar para hacer una petición
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ii9gIC9ldGMvcGFzc3dkIGAiLCJpYXQiOjE2NzY4MjQ5NjF9.0mTFZ_3Yyg_fnV4ZPZcneB0sh1PgNvefZPxX5jhh9_M
 ```
 
-<img src="all-leave.png">
+![](/assets/images/HTB/Awkward/all-leave.png)
 
 Se nos descarga un archivo all-leave el cual contiene el contenido del archivo seleccionado
 
@@ -344,7 +345,7 @@ Found: store.hat-valley.htb (Status: 401) [Size: 188]
 
 Al intentar entrar nos pide credenciales, por suerte la contraseña de bean funciona para admin
 
-<img src="pagina.png">
+![](/assets/images/HTB/Awkward/pagina.png)
 
 Leyendo archivos php en store, encontramos que ejecuta el comando `sed` y unos argumentos que podemos usar para explotar ya que el item_id es algo que podemos controlar
 
@@ -356,7 +357,7 @@ bean@awkward:/var/www/store$
 
 Para eso vamos a shop y agregamos cualquier cosa al carrito
 
-<img src="pagina1.png">
+![](/assets/images/HTB/Awkward/pagina1.png)
 
 En el directorio `cart` de la web se crea un archivo que contiene los datos
 
@@ -399,11 +400,11 @@ bean@awkward:/var/www/store/cart
 
 En la web vamos al carrito y eliminamos el item, pero vamos a interceptarlo con BurpSuite
 
-<img src="pagina2.png">
+![](/assets/images/HTB/Awkward/pagina2.png)
 
 Agregamos a la petición lo mismo que al archivo pero convertimos el espacio a +
 
-<img src="burpsuite.png">
+![](/assets/images/HTB/Awkward/burpsuite.png)
 
 Al darle a `forward`, se ejecuta el script y recibimos la reverse shell
 

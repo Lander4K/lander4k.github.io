@@ -1,11 +1,11 @@
 ---
-title: HTB - Rainyday
-categories: [HackTheBox, Writeup]
-img_path: /assets/HTB/Rainyday
-tags: [HackTheBox, Hard, Docker]
+layout      : post
+title       : "Rainyday - HackTheBox"
+author      : L4nder
+image       : assets/images/HTB/Rainyday/Rainyday.jpg
+category    : [ HackTheBox ]
+tags        : [ Linux ]
 ---
-
-<img src="rainyday.png">
 
 Buenas! El día de hoy completaremos la máquina [RainyDay](https://app.hackthebox.com/machines/RainyDay) de [HackTheBox](https://app.hackthebox.com), donde tocaremos los siguientes puntos:
 
@@ -36,7 +36,7 @@ echo "10.10.11.184 rainycloud.htb" | sudo tee -a /etc/hosts
 
 Al entrar en la web, podemos ver una aplicación de contenedores de docker
 
-<img src="web1.png">
+![](/assets/images/HTB/Rainyday/web1.png)
 
 Esto huele a algún tipo de aplicacíón de Flask en el fondo. Sin embargo, podemos ver algo por la web y fuzzear por directorios, en mi caso voy a usar `gobuster`, pero podéis usar herarmientas como `wfuzz`, `ffuf` o `dirbuster`
 
@@ -79,7 +79,7 @@ Añadimos el dominio al `/etc/hosts`
 
 Investigando la función de login, podemos ver que en un intento fallido, esto aparece dentro del código fuente de la página
 
-<img src="login_fail.png">
+![](/assets/images/HTB/Rainyday/login_fail.png)
 
 Con esto confirmamos que se está utilizando una aplicación Flask usando app.py
 
@@ -87,7 +87,7 @@ Con esto confirmamos que se está utilizando una aplicación Flask usando app.py
 
 Si nos metemos en el subdominio `dev`, nos damos cuenta de que hay algún tipo de WAF o ACL en la web
 
-<img src="subdominio_ipinvalida.png">
+![](/assets/images/HTB/Rainyday/subdominio_ipinvalida.png)
 
 Esto parece ser bypasseable por SSRF, pero ahora mismo es imposible
 
@@ -95,15 +95,15 @@ Esto parece ser bypasseable por SSRF, pero ahora mismo es imposible
 
 Si nos fijamos anteriormente, encontramos el directorio /api, vamos a intentar fuzzear, ahora voy a utilizar `feroxbuster` para fuzzear recursivamente
 
-<img src="feroxbuster.png">
+![](/assets/images/HTB/Rainyday/feroxbuster.png)
 
 Con este fuzzeo encontramos el directorio /api/user/01.0
 
-<img src="api_jack.png">
+![](/assets/images/HTB/Rainyday/api_jack.png)
 
 Encontraremos otros 2 hashes, de `Gary` y de `root`, podemos crackear estos usando john, pero solo el hash de gary fue posible crackearlo.
 
-<img src="gary_passwd.png">
+![](/assets/images/HTB/Rainyday/gary_passwd.png)
 
 Su contraseña es `rubberducky`, con estas contraseñas podemos logearnos en la web como gary
 
@@ -111,11 +111,11 @@ Su contraseña es `rubberducky`, con estas contraseñas podemos logearnos en la 
 
 En el login, podemos crear nuevos contenedores de docker
 
-<img src="docker1.png">
+![](/assets/images/HTB/Rainyday/docker1.png)
 
 En el contenedor de docker, podemos ejecutar comandos, esto se puede conseguir con el botón de `execute command`, pero para conseguir una shell estable, usaremos el botón `Execute Command (background)`
 
-<img src="docker2.png">
+![](/assets/images/HTB/Rainyday/docker2.png)
 
 Podemos usar este payload para conseguir una reverse shell
 
@@ -136,11 +136,11 @@ connect to [10.10.14.37] from [UNKWOWM] [10.10.11.184] 41822
 
 Ahora, tenemos que pensar en cómo utilizar este contenedor para averiguar más sobre la máquina. En primer lugar, echaremos un vistazo a las direcciones IP y descubrimos que deberíamos escanear los otros contenedores presentes en esta red utilizando algún túnel. Lo que nos delató fue la dirección IP que termina en 3, lo que significa que probablemente hay otros hosts en este
 
-<img src="ifconfig_contenedor1.png">
+![](/assets/images/HTB/Rainyday/ifconfig_contenedor1.png)
 
 Transferiremos la herramienta [Chisel](https://github.com/jpillora/chisel) al contenedor y crearemos un túnel
 
-<img src="chisel_contenedor1.png">
+![](/assets/images/HTB/Rainyday/chisel_contenedor1.png)
 
 Lo más probable es que el host `172.18.0.1` (basado en otras máquinas), así que empezaremos por ahí. Testearemos si el puerto 22 y el 80 están abiertos, e igual a nuestro primer escaneo de nmap, los dos están abiertos.
 
@@ -164,13 +164,13 @@ Nos redirige al sitio web original. Anteriormente, encontramos el subdominio dev
 
 Para esto, tendremos que cambiar el túnel socks que se está utilizando.
 
-<img src="chisel1_contenedor1.png">
+![](/assets/images/HTB/Rainyday/chisel1_contenedor1.png)
 
 También tendremos que cambiar el subdominio, ya que ahora está escuchando en el localhost
 
 Y ahora podemos conectarnos al subdominio dev
 
-<img src="dev_subdominio_web.png">
+![](/assets/images/HTB/Rainyday/dev_subdominio_web.png)
 
 ### Web dev
 
@@ -212,25 +212,25 @@ Ahora fuzzearemso en el directorio /api a ver si encontramos algo. Después de u
 
 Visitando la web nos devuelve un objeto JSON
 
-<img src="healthcheck.png">
+![](/assets/images/HTB/Rainyday/healthcheck.png)
 
 La parte de abajo es la más interesante porque contiene una regex y un tipo CUSTOM. Esta página parece estar indicándonos parámetros para una petición POST quizá.
 
 Estamos en lo correcto, pero nos pone que no estamos autenticados 
 
-<img src="burp1.png">
+![](/assets/images/HTB/Rainyday/burp1.png)
 
 Vamos a copiar la cookie de la web principal que teníamos como gary, y funciona
 
-<img src="burp2.png">
+![](/assets/images/HTB/Rainyday/burp2.png)
 
 Ahora que sabemos que existe un app.py, significa que quizá hay un secret.py, porque esto es una aplicación Flask
 
-<img src="burp3.png">
+![](/assets/images/HTB/Rainyday/burp3.png)
 
 Jugando un poco más, nos muestra que el `custom type` necesita de un parámetro `pattern`, indicándonos que podemos filtrar archivos por expresiones regulares, el resultado true/false nos dice que si el carácter está en él.
 
-<img src="burp4.png">
+![](/assets/images/HTB/Rainyday/burp4.png)
 
 Así que ahora, necesitamos crear un script para brute forcear los caracteres de la SECRET_KEY, porque es necesario para decodificar la cookie y (quizá), obtener una contraseña
 
@@ -272,7 +272,7 @@ while True:
 
 Esto nos genera la SECRET_KEY
 
-<img src="secretkey.png">
+![](/assets/images/HTB/Rainyday/secretkey.png)
 
 Ahora podremos conseguir otra cookie usando la herramienta `flask-unsign` y conseguir una sesión como Jack
 
@@ -289,23 +289,23 @@ Ahora que estamos en el contenedor, podemos subir el [pspy](https://github.com/D
 
 Lo que vemos es este comando
 
-<img src="comando.png">
+![](/assets/images/HTB/Rainyday/comando.png)
 
 Es raro este `sleep` tan largo. Vamos a investigar el comando en el directorio `/proc`
 
-<img src="proc.png">
+![](/assets/images/HTB/Rainyday/proc.png)
 
 Existe el directorio `root` dentro del proceso, y al entrar en él observamos otro directorio linux /. Este contiene la user flag y el directorio home de jack
 
-<img src="user.png">
+![](/assets/images/HTB/Rainyday/user.png)
 
 También tiene la clave `id_rsa` privada de jack
 
-<img src="id_rsa.png">
+![](/assets/images/HTB/Rainyday/id_rsa.png)
 
 Con esto, finalmente nos podremos conectar a la máquina como jack.
 
-<img src="ssh.png">
+![](/assets/images/HTB/Rainyday/ssh.png)
 
 ## Escalada de Privilegios
 
@@ -322,7 +322,7 @@ User jack may run the following commands on localhost:
 
 No estaba seguro de lo que era safe_python, pero se ve que es algún tipo de binario. No somos capaces de ver lo que hace, lo que es muy raro. Pero podemos abrir archivos y parece aceptar archivos como parámetro
 
-<img src="safe_python.png">
+![](/assets/images/HTB/Rainyday/safe_python.png)
 
 ```plaintext
 jack@rainyday:~$ echo "hola" > /tmp/test.txt
@@ -427,13 +427,13 @@ for c in allchars:
 
 El resultado sería algo como esto:
 
-<img src="resultado1.png">
+![](/assets/images/HTB/Rainyday/resultado1.png)
 
 H es el primer carácter de la sal. Las pruebas repetidas de este script muestran que el primer carácter de este hash no cambia, lo que indica que la sal es estática y no generada aleatoriamente. Por lo tanto, podemos sacar la sal char por char.
 
 Podemos seguir sacando los siguientes caracteres cambiando la contraseña hash y la contraseña en texto plano, eliminando 1 byte cada vez y añadiendo uno a nuestra variable flag.
 
-<img src="resultado2.png">
+![](/assets/images/HTB/Rainyday/resultado2.png)
 
 H34vyR41n' es el salt final, y ahora podemos descifrar el hash original de root que encontramos antes.
 
