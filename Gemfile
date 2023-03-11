@@ -21,4 +21,6 @@ group :jekyll_plugins do
     gem 'rouge'
 end
 
+gem 'html-proofer'
+
 gem "webrick", "~> 1.7"
