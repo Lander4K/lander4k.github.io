@@ -1,7 +1,7 @@
 ---
 layout      : post
 title       : "Matrix Breakout - Vulnhub"
-author      : l4nder
+author      : L4nder
 image       : assets/images/VH/Matrix-Breakout/matrix.jpg
 category    : [ Vulnhub ]
 tags        : [ Linux ]

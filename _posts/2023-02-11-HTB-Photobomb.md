@@ -1,7 +1,7 @@
 ---
 layout      : post
 title       : "Photobomb - HackTheBox"
-author      : l4nder
+author      : L4nder
 image       : assets/images/HTB/Photobomb/Photobomb.jpg
 category    : [ HackTheBox ]
 tags        : [ Linux ]
