@@ -2,6 +2,7 @@
 layout      : post
 title       : "Absolute - HackTheBox"
 author      : L4nder
+published   : false
 image       : assets/images/HTB/Absolute/Absolute.jpg
 category    : [ HackTheBox ]
 tags        : [ Windwos ]
