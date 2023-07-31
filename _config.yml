@@ -73,7 +73,7 @@ theme_mode: # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn: /assets/img
+img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
 avatar: /assets/img/l4nder.jpg
@@ -154,7 +154,7 @@ defaults:
       layout: page
       permalink: /:title/
   - scope:
-      path: /assets/img/favicon.ico
+      path: assets/img/favicon.ico
     values:
       swcache: true
   - scope:
