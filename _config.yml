@@ -23,7 +23,7 @@ title: L4nder # the main title
 tagline: Ethical Hacker | Red Teamer # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+  Ethical Hacker | Red Teamer
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: "https://lander4k.github.io"
@@ -73,7 +73,7 @@ theme_mode: # [light|dark]
 # will be added to all image (site avatar & posts' images) paths starting with '/'
 #
 # e.g. 'https://cdn.com'
-img_cdn:
+img_cdn: /assets/img
 
 # the avatar on sidebar, support local or CORS resources
 avatar: /assets/img/l4nder.jpg
