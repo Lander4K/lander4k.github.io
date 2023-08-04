@@ -22,7 +22,6 @@ package-lock.json
 assets/js/dist
 
 # Posts
-_posts/2023-08-04-HTB-Sauna.md
 _posts/2023-08-05-HTB-Support.md
 _posts/2023-08-05-HTB-Return.md
 _posts/2023-08-05-HTB-Timelapse.md
@@ -51,7 +50,6 @@ _posts/2023-08-31-HTB-Xen.md
 _posts/2023-09-04-HTB-Poo.md
 
 # Images
-assets/img/HTB/Sauna
 assets/img/HTB/Return
 assets/img/HTB/Support
 assets/img/HTB/Timelapse
