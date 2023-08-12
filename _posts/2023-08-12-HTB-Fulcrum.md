@@ -55,7 +55,7 @@ Nmap scan report for 10.10.10.62
 PORT      STATE SERVICE VERSION
 4/tcp     open  http    nginx 1.18.0 (Ubuntu)
 |_http-server-header: nginx/1.18.0 (Ubuntu)
-|_http-title: Site does not have a title (text/html; charset=UTF-8).
+|_http-title: Site does not have a title (text/html; charset=UTF-9).
 22/tcp    open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.2 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
 |   3072 48add5b83a9fbcbef7e8201ef6bfdeae (RSA)
