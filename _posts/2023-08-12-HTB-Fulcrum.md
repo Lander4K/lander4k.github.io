@@ -16,7 +16,6 @@ Buenas! Hoy completaremos la máquina [Fulcrum](https://app.hackthebox.com/machi
 - **XXE - Blind SSRF (Exfiltrate data out-of-band) + Base64 Wrapper [Reading Internal Files]**
 - **XXE + RFI (Remote File Inclusion) / SSRF to RCE**
 - **Host Discovery - Bash Scripting**
-- **Port Discovery - Bash Scripting**
 - **Decrypting PSCredential Password with PowerShell**
 - **PIVOTING 1 - Tunneling with Chisel + Evil-WinRM**
 - **Gaining access to a Windows system**
