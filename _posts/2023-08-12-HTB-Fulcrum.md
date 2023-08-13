@@ -472,7 +472,7 @@ Ahora que tenemos los túneles creados con proxychains y Evil-WinRM nos conectar
 
 <img src="/assets/img/HTB/Fulcrum/evil-winrm.png">
 
-## Shell como btables (FILE)
+## Consola como btables (FILE)
 * * * 
 
 ### Enumeración
