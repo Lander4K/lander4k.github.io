@@ -510,7 +510,7 @@ def serverSocket():
 
 	server = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 	server.bind("/home/s4vitar/work/socket_test.s")
-	os.system("chmod o+w /home/s4vitar/work/socket_test.s")
+	os.system("chmod o+rw /home/s4vitar/work/socket_test.s")
 
 	while True:
 		server.listen(1)
