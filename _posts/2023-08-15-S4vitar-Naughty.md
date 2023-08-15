@@ -304,7 +304,7 @@ q*e = (e/e)*mod(p)
 q*e = 1*mod(p)
 ```
 
-Siguiendo la [relación de congruencia](https://es.wikipedia.org/wiki/Relaci%C3%B3n_de_congruencia), `1*mod(p)` vale `k*p + 1`, donde `,` es el multiplicador, por lo tanto, tenemos lo siguiente:
+Siguiendo la [relación de congruencia](https://es.wikipedia.org/wiki/Relaci%C3%B3n_de_congruencia), `1*mod(p)` vale `k*p + 1`, donde `k` es el multiplicador, por lo tanto, tenemos lo siguiente:
 
 `q*e = k*p+1`
 
