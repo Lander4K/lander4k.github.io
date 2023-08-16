@@ -286,7 +286,7 @@ Con python importaremos la clave pública para sacar los valores de `e` y `m`
 
 <img src="/assets/img/Otros/Naughty/rsa.png">
 
-El valor de `n` es demasiado grande para factorizarse en la web [factorizedb](http://factordb.com/), en el script de Ruby vemos que para calcular `q` se usa la modular inversa de `p`, asi que podemos expresar `q` de otra manera
+El valor de `n` es demasiado grande para factorizarse en la web [factordb](http://factordb.com/), en el script de Ruby vemos que para calcular `q` se usa la modular inversa de `p`, asi que podemos expresar `q` de otra manera
 
 ```
 q = OpenSSL::BN.new(e).mod_inverse(p)
