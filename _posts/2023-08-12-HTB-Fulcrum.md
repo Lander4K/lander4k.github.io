@@ -575,7 +575,7 @@ Obtenemos las credenciales `BTables:++FileServerLogon12345++`
 
 Aprovechando que podemos enumerar el dominio por LDAP, enumeraremos los administradores del dominio, hay 2
 
-<img src="/assets/img/HTB/Fulcrum/domain-admins.png>
+<img src="/assets/img/HTB/Fulcrum/domain-admins.png">
 
 ### Ejecución en FILE 
 * * *
